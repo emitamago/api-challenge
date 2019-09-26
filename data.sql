@@ -2,15 +2,7 @@ DROP DATABASE IF EXISTS "api-challenge-one";
 CREATE DATABASE "api-challenge-one";
 \c "api-challenge-one"
 
--- CREATE TABLE users (
---     id serial PRIMARY KEY,
---     username TEXT,
---     userage INTEGER,
---     usergender CHAR,
---     lastlocation CHAR,
---     lat INTEGER,
---     long INTEGER,
--- );
+
 CREATE TABLE users (
   user_id INTEGER,
   user_name TEXT NOT NULL,

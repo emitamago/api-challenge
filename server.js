@@ -1,7 +1,7 @@
 /** Start server for elevate. */
 
 const app = require("./app");
-const PORT = 8000
+const { PORT }  = require('./config')
 
 
 app.listen(PORT, function () {
