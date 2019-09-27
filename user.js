@@ -1,5 +1,5 @@
 const db = require("./db");
-const GeoJSON = require('geojson')
+const geoJsonParse = require("./geoJsonHelper")
 
 /**Model for users */
 class User {
@@ -7,11 +7,18 @@ class User {
   static async findAll(){
     
     const result = await db.query(
-      `SELECT  user_id, user_name, user_age, user_gender, last_location, lat, long
+      `SELECT  
+          user_id AS id, 
+          user_name AS name, 
+          user_age AS age,
+          user_gender as gender, 
+          last_location AS city, 
+          lat, 
+          long
       FROM users
        `);
 
-       let users = GeoJSON.parse(result.rows, {Point: ['lat', 'long']});;
+       let users = geoJsonParse(result.rows)
        
        return users;
   }
