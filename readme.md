@@ -18,7 +18,7 @@ to solve this challenge.
 * How to tackle GeoJson
 
 ## Key technologies for this project
-* [Leaflet](https://leafletjs.com/)
+* [geojson](https://www.npmjs.com/package/geojson)
 
 
 ### Original Readme
