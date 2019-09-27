@@ -1,4 +1,5 @@
 const db = require("./db");
+const GeoJSON = require('geojson')
 
 /**Model for users */
 class User {
@@ -10,7 +11,8 @@ class User {
       FROM users
        `);
 
-       let users = result.rows;
+       let users = GeoJSON.parse(result.rows, {Point: ['lat', 'long']});;
+       
        return users;
   }
 }
