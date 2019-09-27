@@ -1,7 +1,10 @@
+/**Helper function to format JSON to GeoJson */
+
 const GeoJSON = require('geojson')
 
-function geoJsonParse(jsonData){
-    let results = jsonData.map(function(obj){
+/**Take array of results from database query return array of GeoJson objects */
+function geoJsonParse(resultArray){
+    let results = resultArray.map(function(obj){
         let oneObj = GeoJSON.parse(obj, {Point: ['lat', 'long'], include: ['city']})
         oneObj['properties']= {
             'id': obj.id, 
@@ -11,7 +14,6 @@ function geoJsonParse(jsonData){
         }
         return oneObj
     });
-    
     return results
 }
 
