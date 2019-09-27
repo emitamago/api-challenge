@@ -1,4 +1,30 @@
-# API Design Challenge
+#Take home challenge practice
+
+## About this project
+* One of practice takehome challenge from Rithm school shared with us.
+* For specification and detail please read below.
+
+## How to run code
+* Download this repository
+* At root, run `pspl < data.sql` to seed cvs data to database
+* From terminal run `npm start` to start server
+* Use Insomnia or similar API testing tool to make HTTP request
+
+## Challenges 
+I have build few basic nodejs API servers but I had couples of new concept and technologies to learn
+to solve this challenge.
+
+* How to handle CSV file. 
+* How to tackle GeoJson
+
+## Key technologies for this project
+* [geojson](https://www.npmjs.com/package/geojson)
+
+
+### Original Readme
+-----------------------------------------------------------------------------------------------------------------------
+
+## API Design Challenge
 
 ## What’s Required
 
