@@ -1,47 +1,40 @@
-/**
- * Generate a selective update query based on a request body:
- *
- * - table: where to make the query
- * - items: an object with keys of columns you want to update and values with
- *          updated values
- * - key: the column that we query by (e.g. username, handle, id)
- * - id: current record ID
- *
- * Returns object containing a DB query as a string, and array of
- * string values to be updated
- *
- */
+const VALIDSEARCHTERMS = ['gender','dist', 'origin','min_age', 'max_age']
 // GET /users?gender=f&dist=100&origin=37.774929,-122.419416&min_age=21&max_age=29
-function sqlForPartialUpdate(table, items, key, id) {
-    // keep track of item indexes
-    // store all the columns we want to update and associate with vals
-  
-    let idx = 1;
-    let columns = [];
-  
-    // filter out keys that start with "_" -- we don't want these in DB
-    for (let key in items) {
-      if (key.startsWith("_")) {
-        delete items[key];
-      }
+function sqlQueryHelper(query) {
+    let searchTerms = [];
+    let searchValues = [];
+    for(let key in query){
+        if(VALIDSEARCHTERMS.indexOf(key) !== -1){
+            searchTerms.push(key)
+            searchValues.push(query[key])
+        }
     }
+    // let idx = 1;
+    // let columns = [];
   
-    for (let column in items) {
-      columns.push(`${column}=$${idx}`);
-      idx += 1;
-    }
+    // // filter out keys that start with "_" -- we don't want these in DB
+    // for (let key in items) {
+    //   if (key.startsWith("_")) {
+    //     delete items[key];
+    //   }
+    // }
   
-    // build query
-    let cols = columns.join(", ");
-    let query = `UPDATE ${table} SET ${cols} WHERE ${key}=$${idx} RETURNING *`;
+    // for (let column in items) {
+    //   columns.push(`${column}=$${idx}`);
+    //   idx += 1;
+    // }
   
-    let values = Object.values(items);
-    values.push(id);
+    // // build query
+    // let cols = columns.join(", ");
+    // let query = `UPDATE ${table} SET ${cols} WHERE ${key}=$${idx} RETURNING *`;
   
-    return { query, values };
+    // let values = Object.values(items);
+    // values.push(id);
+  
+    return [searchTerms, searchValues];
   }
   
   
   
-  module.exports = sqlForPartialUpdate
+  module.exports = sqlQueryHelper;
   

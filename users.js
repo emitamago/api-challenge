@@ -1,6 +1,8 @@
 // Endpoints for user 
-const User = require('./user')
-const getMetadata = require('./getMetaDataHelper')
+const User = require('./user');
+const getMetadata = require('./getMetaDataHelper');
+const sqlQueryHelper = require('./partialQueryHelper');
+
 
 const express = require("express");
 
@@ -10,6 +12,8 @@ const router = new express.Router();
 // GET--- endpoint for getting all users
 router.get('/', async function (req, res, next) {
     try {
+        let array = sqlQueryHelper(req.query)
+        console.log(array)
         let results = await User.findAll();
         let metadata = getMetadata(req);
         let num_results = results.length;
